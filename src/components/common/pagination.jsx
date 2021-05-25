@@ -3,14 +3,15 @@ import _ from 'lodash';
 
 const Pagination = (props) => {
     const {itemsCount, pageSize} = props;
-    const pagesCount = itemsCount / pageSize;   // 2, 3, .. liczba całkowita
+    const pagesCount = Math.ceil(itemsCount / pageSize);   // to może być liczba z przecinkiem!
+    if (pagesCount === 1) return null;
     const pages = _.range(1, pagesCount + 1);
 
     return (
         <nav>
             <ul className="pagination">
                 {pages.map(page => (
-                    <li className="page-item">
+                    <li key={page} className="page-item">
                         <a className="page-link">{page}</a>
                     </li>
                 ))}
